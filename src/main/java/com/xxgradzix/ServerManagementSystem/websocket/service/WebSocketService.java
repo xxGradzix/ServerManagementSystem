@@ -25,6 +25,7 @@ public class WebSocketService {
         } catch (URISyntaxException e) {
             throw new RuntimeException("Błąd przy tworzeniu klienta WebSocket", e);
         }
+
         webSocketClient.connect();
     }
 

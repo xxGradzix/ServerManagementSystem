@@ -1,5 +1,7 @@
 package com.xxgradzix.ServerManagementSystem;
 
+import com.xxgradzix.ServerManagementSystem.user.service.UserService;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +16,13 @@ public class ServerManagementSystemApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ServerManagementSystemApplication.class, args);
+	}
+
+	@Bean
+	CommandLineRunner createAdmin(UserService userService) {
+		return (args) -> {
+			userService.createAdminIfNotExists();
+		};
 	}
 
 	@Bean
