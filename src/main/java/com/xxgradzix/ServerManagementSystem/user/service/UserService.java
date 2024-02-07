@@ -6,7 +6,9 @@ import com.xxgradzix.ServerManagementSystem.user.repository.UserEntityRepository
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService {
@@ -18,8 +20,12 @@ public class UserService {
         this.userEntityRepository = userEntityRepository;
         this.passwordEncoder = passwordEncoder;
     }
-
-    public void createAdminIfNotExists() {
+    public void grantAdminAuthority(Long userId) {
+        UserEntity user = userEntityRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        user.getRoles().add(Role.ADMIN);
+        userEntityRepository.save(user);
+    }
+    public void createHeadAdminIfNotExists() {
         final String adminName = "admin";
         Optional<UserEntity> admin = userEntityRepository.findByEmailIgnoreCase(adminName);
 
@@ -29,7 +35,7 @@ public class UserService {
                     .email(adminName)
                     .password(passwordEncoder.encode(adminName))
                     .username(adminName)
-                    .role(Role.ADMIN)
+                    .roles(Set.of(Role.values()))
                     .build();
             userEntityRepository.save(adminUser);
         }

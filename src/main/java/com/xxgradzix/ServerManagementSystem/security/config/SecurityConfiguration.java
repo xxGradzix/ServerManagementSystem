@@ -30,6 +30,12 @@ public class SecurityConfiguration {
                             .permitAll()
                             .requestMatchers("/api/v1/admin/**")
                             .hasAuthority(Role.ADMIN.name())
+                            .requestMatchers("/api/v1/user/grantAdminAuthority/**")
+                            .hasAuthority(Role.HEAD_ADMIN.name())
+                            .requestMatchers("/api/v1/task/headAdmin/**")
+                            .hasAuthority(Role.HEAD_ADMIN.name())
+                            .requestMatchers("/api/v1/task/admin/**")
+                            .hasAuthority(Role.ADMIN.name())
                             .anyRequest()
                             .authenticated();
                 })

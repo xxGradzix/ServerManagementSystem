@@ -21,7 +21,7 @@ public class ServerManagementSystemApplication {
 	@Bean
 	CommandLineRunner createAdmin(UserService userService) {
 		return (args) -> {
-			userService.createAdminIfNotExists();
+			userService.createHeadAdminIfNotExists();
 		};
 	}
 
