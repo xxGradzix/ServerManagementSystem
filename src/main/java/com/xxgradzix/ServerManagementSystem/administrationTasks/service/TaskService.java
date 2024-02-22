@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class TaskService {
@@ -54,7 +55,9 @@ public class TaskService {
     public TaskEntity assignUserToTask(Long taskId, Long userId) {
         TaskEntity task = taskRepository.findById(taskId).orElseThrow(() -> new ApiRequestException("Task not found"));
         UserEntity user = userEntityRepository.findById(userId).orElseThrow(() -> new ApiRequestException("User not found"));
-        task.getAssignedUsers().add(user);
+        Set<UserEntity> assignedUsers = task.getAssignedUsers();
+        assignedUsers.add(user);
+        task.setAssignedUsers(assignedUsers);
         return taskRepository.save(task);
     }
     public TaskEntity removeUserFromTask(Long taskId, Long userId) {
