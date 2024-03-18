@@ -27,6 +27,7 @@ public class UserService {
     }
     public void createHeadAdminIfNotExists() {
         final String adminName = "admin";
+
         Optional<UserEntity> admin = userEntityRepository.findByEmailIgnoreCase(adminName);
 
         if (admin.isEmpty()) {

@@ -22,11 +22,11 @@ public class SecurityConfiguration {
     private final JwtAuthFilter jwtAuthFilter;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
         http.
                 csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> {
-                    authorize.requestMatchers("/api/v1/auth/**")
+                    authorize
+                            .requestMatchers("/api/v1/auth/**")
                             .permitAll()
                             .requestMatchers("/api/v1/admin/**")
                             .hasAuthority(Role.ADMIN.name())
@@ -36,14 +36,18 @@ public class SecurityConfiguration {
                             .hasAuthority(Role.HEAD_ADMIN.name())
                             .requestMatchers("/api/v1/task/admin/**")
                             .hasAuthority(Role.ADMIN.name())
+                            .requestMatchers("/api/v1/paypal/**")
+                            .permitAll()
                             .anyRequest()
-                            .authenticated();
+                            .authenticated()
+                    ;
                 })
                 .sessionManagement(httpSecuritySessionManagementConfigurer -> {
                     httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
                 })
                 .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+        ;
         return http.build();
     }
 

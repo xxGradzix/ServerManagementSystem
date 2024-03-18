@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Good Thymes Virtual Grocery</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../../css/gtvg.css" th:href="@{/css/gtvg.css}" />
+</head>
+
+<body>
+
+    <p>Paypal</p>
+    <div id="paypal-button-container">
+
+        <form method="post" action="/api/v1/paypal/payment/create" class="mt-5 card p-3" th:csrf>
+            <div class="d-flex justify-context-center">
+                <button type="submit" class="btn btn-primary">Pay with PayPal</button>
+            </div>
+        </form>
+
+    </div>
+
+</body>
+
+</html>

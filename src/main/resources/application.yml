@@ -19,3 +19,8 @@ server:
 #
 jwt:
   secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+
+paypal:
+  client-id: AbZkyiLDe6jhH0Q2IRUrUmVufJtMmXH5w_HZJlHKK3LCgQvngfuU8_EMpXDAE-2y4hsAe0A8EqV2GrBf
+  client-secret: EOg7_wyehzPkXHZvFL6JfWYL9sERZd8WTTOa3EK-npE-_NvHlHfUaX12YlCcy1y67df-d_b6HwEzD8BY
+  mode: sandbox
